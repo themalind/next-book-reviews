@@ -1,7 +1,9 @@
 import { db } from "./db";
 
 async function main() {
+  await db.comment.deleteMany();
   await db.book.deleteMany();
+
   await db.book.create({
     data: {
       title: "The Hobbit",
@@ -13,6 +15,20 @@ The story begins with Bilbo reluctantly leaving his home in Bag End. The group e
 The company faces further perils, including capture by wood-elves and confrontations with giant spiders in Mirkwood. Bilbo’s courage grows as he rescues the dwarves multiple times. Eventually, they reach the Lonely Mountain, where Bilbo confronts Smaug. His cleverness provokes the dragon, leading to Smaug’s attack on the nearby town of Lake-town, where he is killed by a human archer, Bard.
 The treasure attracts various factions—humans, elves, and dwarves—who nearly go to war in the Battle of the Five Armies. However, goblins and wargs attack, forcing the groups to unite. Thorin dies in the battle, and peace is restored. Bilbo returns home with a share of the treasure and the ring, forever changed by his adventure.
 The novel explores themes of bravery, greed, and personal growth, setting the stage for The Lord of the Rings.`,
+      comments: {
+        create: [
+          {
+            content: "This is a very nice book!",
+            author: "Mysan",
+            publishDate: new Date("2024-10-10"),
+          },
+          {
+            content: "I didn't like it...",
+            author: "David",
+            publishDate: new Date("2025-05-10"),
+          },
+        ],
+      },
     },
   });
 
