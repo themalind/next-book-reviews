@@ -25,7 +25,10 @@ export async function generateMetadata(
 
 export default async function BookPage(props: Props) {
   const { slug } = await props.params;
-  const book = await db.book.findUnique({ where: { slug } });
+  const book = await db.book.findUnique({
+    where: { slug },
+    include: { comments: true },
+  });
 
   if (!book) {
     return (
@@ -45,9 +48,18 @@ export default async function BookPage(props: Props) {
           Publish Date: {book.publishDate.toLocaleDateString()}
         </p>
       </article>
+
       <section>
         <h2 className="text-xl">Comments</h2>
-        <p>There are no comments for this book yet...</p>
+        {book.comments.length === 0 ? (
+          <p>There are no comments for this book yet...</p>
+        ) : (
+          book.comments.map((c) => (
+            <article key={c.id}>
+              <p>{c.content}</p>
+            </article>
+          ))
+        )}
       </section>
     </main>
   );
