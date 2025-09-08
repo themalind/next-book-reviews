@@ -1,4 +1,5 @@
 import { db } from "@/prisma/db";
+import { Metadata, ResolvingMetadata } from "next";
 
 export async function generateStaticParams() {
   return db.book.findMany({ select: { slug: true } });
@@ -6,6 +7,20 @@ export async function generateStaticParams() {
 
 interface Props {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata(
+  props: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { title } = await parent;
+  const { slug } = await props.params;
+  const book = await db.book.findUnique({ where: { slug } });
+
+  return {
+    title: title!.absolute + " | " + book!.title,
+    description: book!.summary.substring(0, 100),
+  };
 }
 
 export default async function BookPage(props: Props) {
