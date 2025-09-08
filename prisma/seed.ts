@@ -4,8 +4,8 @@ async function main() {
   await db.book.deleteMany();
   await db.book.create({
     data: {
-      title: "Hobbit",
-      slug: "hobbit",
+      title: "The Hobbit",
+      slug: "the-hobbit",
       author: "Tolkien",
       publishDate: new Date("1990-10-08"),
       summary: `The Hobbit by J.R.R. Tolkien is a fantasy novel that follows the adventure of Bilbo Baggins, a comfort-loving hobbit from the Shire. Bilbo is recruited by the wizard Gandalf to join a group of thirteen dwarves, led by Thorin Oakenshield, on a quest to reclaim the dwarves' mountain home and treasure from the dragon Smaug.
@@ -18,8 +18,8 @@ The novel explores themes of bravery, greed, and personal growth, setting the st
 
   await db.book.create({
     data: {
-      title: "Harry Potter",
-      slug: "harry-potter",
+      title: "Harry Potter and the Philosopher’s Stone",
+      slug: "harry-potter-and-the-philosophers-stone",
       author: "JK Rowling",
       publishDate: new Date("1994-03-08"),
       summary: `Harry Potter and the Philosopher’s Stone (1997), the first book in J.K. Rowling’s series, introduces Harry Potter, an orphaned boy living with his cruel aunt, uncle, and cousin, the Dursleys, in England. On his 11th birthday, Harry learns he’s a wizard when Rubeus Hagrid, a half-giant, reveals that Harry’s parents, James and Lily, were killed by the dark wizard Voldemort. Voldemort also tried to kill baby Harry but failed, leaving him with a lightning-shaped scar and reducing Voldemort to a weakened state.
