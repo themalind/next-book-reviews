@@ -1,5 +1,9 @@
 import { db } from "@/prisma/db";
 
+export async function generateStaticParams() {
+  return db.book.findMany({ select: { slug: true } });
+}
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
