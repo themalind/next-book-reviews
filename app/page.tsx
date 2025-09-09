@@ -1,6 +1,12 @@
 import { db } from "@/prisma/db";
 import Link from "next/link";
 
+/** Kan användas för att bestämma hur ofta sidan ska byggas om. */
+export const revalidate = 3600; // 1h
+
+/** Kan användas för att exempelvis tvinga SSR. */
+// export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const books = await db.book.findMany({
     include: { _count: true },

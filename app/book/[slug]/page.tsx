@@ -1,14 +1,16 @@
 import { db } from "@/prisma/db";
 import { Metadata, ResolvingMetadata } from "next";
 
-export async function generateStaticParams() {
-  return db.book.findMany({ select: { slug: true } });
-}
-
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
+/** Berättar för Next.JS vilka detaljsidor som ska byggas (SSG) */
+export async function generateStaticParams() {
+  return db.book.findMany({ select: { slug: true } });
+}
+
+/** Sätter meta data per sida vilket ökar UX vid delning av länkar samt SEO */
 export async function generateMetadata(
   props: Props,
   parent: ResolvingMetadata
@@ -23,6 +25,7 @@ export async function generateMetadata(
   };
 }
 
+/** Komponenten för sidan, använder params för att hitta rätt bok */
 export default async function BookPage(props: Props) {
   const { slug } = await props.params;
   const book = await db.book.findUnique({
